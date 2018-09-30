@@ -28,17 +28,21 @@ namespace GroceryList
 
 		void OnItemsClick(object sender, EventArgs e)
 		{
-			// TODO
+            var intent = new Intent(this, typeof(ItemsActivity));
+
+            StartActivity(intent);
 		}
 
 		void OnAddItemClick(object sender, EventArgs e)
 		{
-			// TODO
-		}
+            var intent = new Intent(this, typeof(AddItemActivity));
+
+            StartActivity(intent);
+        }
 
 		void OnAboutClick(object sender, EventArgs e)
 		{
-			// TODO
+            StartActivity(typeof(AboutActivity));
 		}
 
 		protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
