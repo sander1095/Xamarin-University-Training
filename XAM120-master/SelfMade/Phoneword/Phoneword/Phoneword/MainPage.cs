@@ -33,6 +33,7 @@ namespace Phoneword
             };
 
             _translateButton.Clicked += OnTranslate;
+            _callButton.Clicked += OnCall;
             #endregion
 
             Padding = new Thickness(20);
@@ -53,7 +54,20 @@ namespace Phoneword
                 }
             };
 
-            Content = layout;        
+            Content = layout;
+        }
+
+        private async void OnCall(object sender, EventArgs e)
+        {
+            var shouldCall = await DisplayAlert("Dial a number", $"Would you like to call {_translatedNumber}?", "Yes", "No");
+            if (shouldCall)
+            {
+                var dialer = DependencyService.Get<IDialer>();
+                if (dialer != null)
+                {
+                    await dialer.DialAsync(_translatedNumber);
+                }
+            }
         }
 
         private void OnTranslate(object sender, EventArgs e)
